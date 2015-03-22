@@ -5,7 +5,7 @@ var sms = {
     bind: function(){
         bus.on('sms', function(data){
             sms.parse(data, function(err, model){
-                if(err)return bus.emit('error');
+                if(err)return bus.emit('error',err);
                 bus.emit('switch',model);
             });
         });
@@ -23,6 +23,9 @@ var sms = {
             else if(token === 'off')result.action = 'off';
             else result.device = token;
         });
+        if(!result.device || !result.action){
+            return cb('bad data');
+        }
         cb(null, result);
     }
 }
