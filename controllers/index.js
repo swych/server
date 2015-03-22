@@ -1,4 +1,8 @@
 var bus = require('../config/events');
+var cache = require('memory-cache');
+
+var ipCache = {};
+var uuid = require('uuid');
 
 module.exports = {
     sms:function(req,res,next){
@@ -26,9 +30,23 @@ module.exports = {
         res.send({hello: 'ping'});
         next();
     },
+    devices:function(req,res,next){
+        var devices = [];
+        Object.keys(ipCache).forEach(function(key){
+            var cache = ipCache[key];
+            var now = new Date();
+            if(now.getTime() - cache.when.getTime() < 1000){
+                devices.push(cache.ips);
+            }
+        });
+        res.send(devices);
+        next();
+    },
     deviceRegister:function(req,res,next){
         console.log('device register', req.params);
         var ips = req.params.ips || '';
+        var id = uuid.v4();
+        ipCache[id]={ips:ips,when:new Date()};
         bus.emit('register', {ips:ips.join(',')});
         res.send({hello: 'register'});
         next();
