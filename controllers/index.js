@@ -8,6 +8,7 @@ module.exports = {
             body:req.params.body,
             to:req.params.to
         }
+
         bus.emit('sms', sanitized);
         res.status(200);
         res.end();

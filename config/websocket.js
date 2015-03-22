@@ -30,7 +30,7 @@ module.exports = {
         bus.on('switch', function(data){
             var request = {command:'switch',data:data};
             var payload = JSON.stringify(request);
-            console.log(payload);
+            console.log('WS PAYLOAD',payload);
             Object.keys(clients).forEach(function(key){
 
                 clients[key].send(payload);
