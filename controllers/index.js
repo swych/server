@@ -36,6 +36,7 @@ module.exports = {
     },
     devices:function(req,res,next){
         var devices = [];
+        console.log('DEVICE REQUEST',cache);
         Object.keys(ipCache).forEach(function(key){
             var cache = ipCache[key];
             var now = new Date();
