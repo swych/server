@@ -11,6 +11,7 @@ module.exports = {
         server.pre(restify.pre.sanitizePath());
         server.get('/', controllers.ping);
         server.get('/device/register', controllers.deviceRegister);
+        server.get('/device/list', controllers.devices);
         server.get('/device/ping', controllers.devicePing);
         server.post('/hooks/sms', controllers.sms);
         server.get('/hooks/sms', controllers.sms);
