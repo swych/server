@@ -21,13 +21,15 @@ module.exports = {
     },
     devicePing:function(req,res,next){
         console.log('device ping', req.params);
-        bus.emit('ping', {ips:req.params.ips});
+        var ips = req.params.ips || '';
+        bus.emit('ping', {ips:ips.join(',')});
         res.send({hello: 'ping'});
         next();
     },
     deviceRegister:function(req,res,next){
         console.log('device register', req.params);
-        bus.emit('register', {ips:req.params.ips});
+        var ips = req.params.ips || '';
+        bus.emit('register', {ips:ips.join(',')});
         res.send({hello: 'register'});
         next();
     }
