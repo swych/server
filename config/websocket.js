@@ -36,6 +36,20 @@ module.exports = {
                 clients[key].send(payload);
             });
         });
+        bus.on('register', function(data){
+            var request = {command:'register',data:data};
+            var payload = JSON.stringify(request);
+            Object.keys(clients).forEach(function(key){
+                clients[key].send(payload);
+            });
+        });
+        bus.on('ping', function(data){
+            var request = {command:'ping',data:data};
+            var payload = JSON.stringify(request);
+            Object.keys(clients).forEach(function(key){
+                clients[key].send(payload);
+            });
+        });
 
         console.log('Connection will begin on next tick for localhost');
 

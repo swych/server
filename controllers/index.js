@@ -21,12 +21,14 @@ module.exports = {
     },
     devicePing:function(req,res,next){
         console.log('device ping', req.params);
-        res.send({hello: 'world!'});
+        bus.emit('ping', {ips:req.params.ips});
+        res.send({hello: 'ping'});
         next();
     },
     deviceRegister:function(req,res,next){
         console.log('device register', req.params);
-        res.send({hello: 'world!'});
+        bus.emit('register', {ips:req.params.ips});
+        res.send({hello: 'register'});
         next();
     }
 
