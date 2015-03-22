@@ -4,10 +4,11 @@ module.exports = {
     sms:function(req,res,next){
         if(!req.params)throw 'Bad request';
         var sanitized = {
-            from:req.params.from,
-            body:req.params.body,
-            to:req.params.to
+            from:req.params.From,
+            body:req.params.Body,
+            to:req.params.To
         }
+        console.log('REST ENDPOINT',sanitized);
 
         bus.emit('sms', sanitized);
         res.status(200);
