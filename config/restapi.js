@@ -11,6 +11,7 @@ module.exports = {
         server.pre(restify.pre.sanitizePath());
         server.get('/', controllers.ping);
         server.post('/hooks/sms', controllers.sms);
+        server.get('/hooks/sms', controllers.sms);
 
 
         server.listen(port, function() {
