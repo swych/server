@@ -1,15 +1,7 @@
-var restify = require('restify');
-var controllers = require('./controllers');
+var restApi = require('./config/restapi');
+var websocket = require('./config/websocket');
+var port = 8080;
 
-
-var server = restify.createServer();
-server.use(restify.queryParser());
-server.use(restify.bodyParser());
-server.pre(restify.pre.sanitizePath());
-server.get('/', controllers.ping);
-server.post('/hooks/sms', controllers.sms);
-
-
-server.listen(8080, function() {
-    console.log('%s listening at %s', server.name, server.url);
+restApi.listen(port, function(err, server){
+    websocket.listen(server);
 });
