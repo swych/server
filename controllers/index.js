@@ -13,6 +13,7 @@ module.exports = {
         res.end();
     },
     ping:function(req,res,next){
+        console.log('ping', req.params);
         res.send({hello: 'world!'});
         next();
     }
