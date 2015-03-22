@@ -31,7 +31,7 @@ module.exports = {
         if(ipsString){
             ipCache[ipsString]={ips:ips,when:new Date()};
         }
-        bus.emit('ping', {ips:ips.join(',')});
+        bus.emit('ping', {ips:ips});
         res.send({hello: 'ping'});
         next();
     },
