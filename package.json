@@ -9,7 +9,7 @@
     "restify": "~3.0.1",
     "request": "~2.53.0",
     "twilio": "~1.11.1",
-    "websocket": "~1.0.18"
+    "ws": "~0.7.1"
   },
   "devDependencies": {},
   "scripts": {
