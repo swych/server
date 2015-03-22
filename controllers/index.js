@@ -2,7 +2,7 @@ var bus = require('../config/events');
 var cache = require('memory-cache');
 
 var ipCache = {};
-var uuid = require('uuid');
+
 
 module.exports = {
     sms:function(req,res,next){
@@ -25,7 +25,11 @@ module.exports = {
     },
     devicePing:function(req,res,next){
         console.log('device ping', req.params);
-        var ips = req.params.ips || '';
+        var ipsString = req.params.ips || null;
+        var ips = (req.params.ips &&  req.params.ips.join(','))|| [];
+        if(ipsString){
+            ipCache[ipsString]={ips:ips,when:new Date()};
+        }
         bus.emit('ping', {ips:ips.join(',')});
         res.send({hello: 'ping'});
         next();
@@ -45,10 +49,13 @@ module.exports = {
     },
     deviceRegister:function(req,res,next){
         console.log('device register', req.params);
-        var ips = req.params.ips || '';
-        var id = uuid.v4();
-        ipCache[id]={ips:ips,when:new Date()};
-        bus.emit('register', {ips:ips.join(',')});
+        var ipsString = req.params.ips || null;
+        var ips = (req.params.ips &&  req.params.ips.join(','))|| [];
+
+        if(ipsString){
+            ipCache[ipsString]={ips:ips,when:new Date()};
+        }
+        bus.emit('register', {ips:ips});
         res.send({hello: 'register'});
         next();
     }
