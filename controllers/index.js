@@ -35,6 +35,7 @@ module.exports = {
         Object.keys(ipCache).forEach(function(key){
             var cache = ipCache[key];
             var now = new Date();
+            console.log('DEVICE COMPARE',cache.when.getTime(),now.getTime());
             if(now.getTime() - cache.when.getTime() < 1000){
                 devices.push(cache.ips);
             }
