@@ -18,5 +18,16 @@ module.exports = {
         console.log('ping', req.params);
         res.send({hello: 'world!'});
         next();
+    },
+    devicePing:function(req,res,next){
+        console.log('device ping', req.params);
+        res.send({hello: 'world!'});
+        next();
+    },
+    deviceRegister:function(req,res,next){
+        console.log('device register', req.params);
+        res.send({hello: 'world!'});
+        next();
     }
+
 }
