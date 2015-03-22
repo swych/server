@@ -1,14 +1,14 @@
 var restify = require('restify');
+var controllers = require('./controllers');
 
-function respond(req, res, next) {
-    res.send({hello: 'world!'});
-    next();
-}
 
 var server = restify.createServer();
-server.get('/', respond);
+server.use(restify.queryParser());
+server.use(restify.bodyParser());
+server.get('/', controllers.ping);
+server.post('/hook/sms', controllers.sms);
+
 
 server.listen(8080, function() {
     console.log('%s listening at %s', server.name, server.url);
-    console.log('bump');
 });
