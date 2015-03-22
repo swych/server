@@ -6,7 +6,7 @@ var server = restify.createServer();
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.get('/', controllers.ping);
-server.post('/hook/sms', controllers.sms);
+server.post('/hooks/sms', controllers.sms);
 
 
 server.listen(8080, function() {
