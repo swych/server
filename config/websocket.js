@@ -15,7 +15,7 @@ module.exports = {
             clients[connectionId] = ws;
 
             ws.on('message', function incoming(message) {
-                console.log('Message from board: %s', message);
+                console.log('Message: %s', message);
             });
 
             ws.on('close', function close() {
@@ -24,16 +24,15 @@ module.exports = {
             });
 
 
-            bus.on('switch', function(data){
-                var isOn = data.on;
-                var device = data.device;
-                Object.keys(clients).forEach(function(key){
-                    var payload = JSON.stringify({
-                        on:isOn,
-                        device:device
-                    });
-                    clients[key].send(payload);
-                });
+
+        });
+        bus.on('switch', function(data){
+            var request = {command:'switch',data:data};
+            var payload = JSON.stringify(request);
+            console.log(payload);
+            Object.keys(clients).forEach(function(key){
+
+                clients[key].send(payload);
             });
         });
 

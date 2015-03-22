@@ -10,7 +10,8 @@
     "request": "~2.53.0",
     "twilio": "~1.11.1",
     "ws": "~0.7.1",
-    "uuid": "~2.0.1"
+    "uuid": "~2.0.1",
+    "lodash": "~3.5.0"
   },
   "devDependencies": {},
   "scripts": {

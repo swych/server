@@ -1,9 +1,9 @@
 var bus = require('../config/events');
+var _ = require('lodash');
 
 var sms = {
     bind: function(){
         bus.on('sms', function(data){
-            console.log(data);
             sms.parse(data, function(err, model){
                 if(err)return bus.emit('error');
                 bus.emit('switch',model);
@@ -14,11 +14,13 @@ var sms = {
         // text body parse
         var body = data.body;
         var tokens = body.split(' ');
-        var result = {on:false};
+        var result = _.cloneDeep(data);
+
         tokens.forEach(function(token){
             token = token.toLowerCase();
             if(token === 'turn')return;
-            else if(token === 'on')result.on = true;
+            else if(token === 'on')result.action = 'on';
+            else if(token === 'off')result.action = 'off';
             else result.device = token;
         });
         cb(null, result);
