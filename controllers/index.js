@@ -24,9 +24,10 @@ module.exports = {
         next();
     },
     devicePing:function(req,res,next){
-        console.log('device ping', req.params);
+
         var ipsString = req.params.ips || null;
-        var ips = (req.params.ips &&  req.params.ips.join(','))|| [];
+        var ips = (ipsString &&  ipsString.join(','))|| [];
+        console.log('device ping', ips);
         if(ipsString){
             ipCache[ipsString]={ips:ips,when:new Date()};
         }
@@ -51,7 +52,7 @@ module.exports = {
     deviceRegister:function(req,res,next){
         console.log('device register', req.params);
         var ipsString = req.params.ips || null;
-        var ips = (req.params.ips &&  req.params.ips.join(','))|| [];
+        var ips = (ipsString &&  ipsString.join(','))|| [];
 
         if(ipsString){
             ipCache[ipsString]={ips:ips,when:new Date()};
