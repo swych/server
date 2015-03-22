@@ -13,13 +13,14 @@ module.exports = {
 
             var connectionId = uuid.v4();
             clients[connectionId] = ws;
+            console.log('Connected: %s', connectionId);
 
             ws.on('message', function incoming(message) {
                 console.log('Message: %s', message);
             });
 
             ws.on('close', function close() {
-                console.log('disconnected');
+                console.log('disconnected'+connectionId);
                 delete clients[connectionId];
             });
 
