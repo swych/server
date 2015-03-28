@@ -54,7 +54,7 @@ The managers folder contains module-cached singletons that power a web and data 
 Managers will likely only include *mongoose*, *web-sockets*, *restify*, and *express*. An event bus will be available via managers as well.
 The event bus will be implemented throughout the entire app with most of its bindings happening within config and most of its triggers happening within tasks.
 
-The event bus is the control flow module that is free to exist in any project folder with one major exception. The event bus (or any other manager) should be required in the `lib` folder.
+The event bus is the control flow module that is free to exist in any project folder with one major exception. The event bus (or any other manager) should never be required in the `lib` folder.
 
 ### gulp
 
